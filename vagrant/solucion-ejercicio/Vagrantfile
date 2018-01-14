@@ -1,0 +1,54 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+  # Definimos el bloque de configuracion de la maquina virtual de centos
+  config.vm.define "centos" do |subconfig|
+    # Utilizamos la box base de centos 7
+    subconfig.vm.box = "centos/7"
+    
+    # Mapeamos el puerto 8000 al 8383 solo para localhost
+    subconfig.vm.network "forwarded_port", guest: 3000, host: 8383, host_ip: "127.0.0.1"
+    # Definimos una interfaz de red privada con una IP fija
+    subconfig.vm.network "private_network", ip: "192.168.0.3"
+
+    # Sincronizamos la carpeta donde guardamos el servidor NodeJS
+    subconfig.vm.synced_folder "src-ubuntu/", "/srv/webserver/"
+
+    # Utilizamos un script para aprovisionar la maquina
+    subconfig.vm.provision "shell", path: "scripts/install-centos-dependencies.sh"
+
+    # Seteamos la meomria y la cpu
+    subconfig.vm.provider "virtualbox" do |vb|
+      vb.memory = "512"
+      vb.cpus = "1"
+    end
+  end
+
+  # Definimos el bloque de configuracion de la maquina virtual de ubuntu 
+  config.vm.define "ubuntu" do |subconfig|
+    # Utilizamos la box base de ubuntu 16.04
+    subconfig.vm.box = "ubuntu/xenial64"
+    
+    # Mapeamos el puerto 8000 al 8484 solo para localhost
+    subconfig.vm.network "forwarded_port", guest: 3000, host: 8484, host_ip: "127.0.0.1"
+    # Definimos una interfaz de red privada con una IP fija
+    subconfig.vm.network "private_network", ip: "192.168.0.4"
+
+    # Sincronizamos la carpeta donde guardamos el servidor NodeJS
+    subconfig.vm.synced_folder "src-centos/", "/srv/webserver/"
+
+    # Utilizamos un script para aprovisionar la maquina
+    subconfig.vm.provision "shell", path: "scripts/install-ubuntu-dependencies.sh"
+
+    # Seteamos la meomria y la cpu
+    subconfig.vm.provider "virtualbox" do |vb|
+      vb.memory = "512"
+      vb.cpus = "1"
+    end
+  end
+end
