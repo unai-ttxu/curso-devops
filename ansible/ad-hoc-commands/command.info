@@ -1,0 +1,3 @@
+ansible -i hosts --become -m shell -a "apt-get install -y nodejs" host0 
+
+ansible -i hosts --become -m copy -a "src=src/server.js dest=/home/ubuntu/server.js" host0 
