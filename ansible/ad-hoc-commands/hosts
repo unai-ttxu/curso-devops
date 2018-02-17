@@ -1,4 +1,3 @@
-[vagrant]
-host0 ansible_host=192.168.30.10 ansible_user=ubuntu
-host1 ansible_host=192.168.30.11 ansible_user=ubuntu
-host2 ansible_host=192.168.30.12 ansible_user=ubuntu
+host0 ansible_host=192.168.30.10 ansible_user=vagrant
+host1 ansible_host=192.168.30.11 ansible_user=vagrant
+host2 ansible_host=192.168.30.12 ansible_user=vagrant

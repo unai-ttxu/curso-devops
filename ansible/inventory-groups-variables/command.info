@@ -1,0 +1,19 @@
+# Commands to group
+ansible -i hosts -m shell -a "hostname -f" server 
+
+ansible -i hosts -m shell -a "hostname -f" client
+
+# Variables de grupo en hosts
+ansible -i hosts -m shell -a "echo {{server_var_hosts}}" server 
+
+ansible -i hosts -m shell -a "echo {{client_var_hosts}}" client 
+
+# Variables de grupo en group_vars
+ansible -i hosts -m shell -a "echo {{server_var_groupvars}}" server
+
+ansible -i hosts -m shell -a "echo {{client_var_groupvars}}" client
+
+# Variables de host en host_vars
+ansible -i hosts -m shell -a "echo {{host_var_hostvars}}" host0
+
+ansible -i hosts -m shell -a "echo {{host_var_hostvars}}" host1

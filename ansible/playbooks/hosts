@@ -1,0 +1,12 @@
+[server]
+host0 ansible_host=192.168.30.10 ansible_user=vagrant
+host1 ansible_host=192.168.30.11 ansible_user=vagrant
+
+[server:vars]
+server_var_hosts="Soy la variable del grupo server definida en el inventario principal"
+
+[client]
+host2 ansible_host=192.168.30.12 ansible_user=vagrant
+
+[client:vars]
+client_var_hosts="Soy la variable del grupo client definida en el inventario principal"

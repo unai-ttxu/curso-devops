@@ -1,0 +1,17 @@
+- hosts: server
+  become: true
+  tasks:
+    - name: Instalando el paquete de epel-release
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Instalando el paquete de nodejs 
+      yum:
+        name: nodejs
+        state: present
+
+    - name: Copiando el archivo de server.js 
+      copy:
+        src: "src/server.js"
+        dest: "/home/vagrant/server.js"

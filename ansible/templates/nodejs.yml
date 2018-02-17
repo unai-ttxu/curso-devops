@@ -1,0 +1,19 @@
+- hosts: server
+  become: true
+  vars:
+#    nodejs_server_port: 3001
+  tasks:
+    - name: Instalando el paquete de epel-release
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Instalando el paquete de nodejs 
+      yum:
+        name: nodejs
+        state: present
+
+    - name: Generando el archivo de server.js
+      template:
+        src: "templates/server.js.j2"
+        dest: "/home/vagrant/server.js"

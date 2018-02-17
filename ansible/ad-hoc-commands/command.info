@@ -1,3 +1,12 @@
-ansible -i hosts --become -m shell -a "apt-get install -y nodejs" host0 
+# Shell commands
+ansible -i hosts --become -m shell -a "yum install -y epel-release && yum install -y nodejs" host0 
 
-ansible -i hosts --become -m copy -a "src=src/server.js dest=/home/ubuntu/server.js" host0 
+# Copy files
+ansible -i hosts --become -m copy -a "src=src/server.js dest=/home/vagrant/server.js" host0 
+
+# Commands to all hosts
+ansible -i hosts -m shell -a "hostname -f" all 
+
+# Facts
+ansible -i hosts -m setup all
+

@@ -1,0 +1,5 @@
+# Crear estructura roles
+mkdir tasks handlers templates files vars meta
+echo "---" > {handlers,meta,tasks,vars}/main.yml
+
+ansible-playbook -i hosts nodejs.yml
